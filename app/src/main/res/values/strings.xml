@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Score</string>
+    <string name="score_undo">실행취소</string>
+    <string name="game_over">라운드종료</string>
+    <string name="Confirm">확  인</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Start">Start</string>
+    <string name="Score">스코어확인</string>
+</resources>

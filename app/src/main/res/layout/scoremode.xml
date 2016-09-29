@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:background="@drawable/background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/btn_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Score"
+            android:textSize="@dimen/board_txt"
+            android:textColor="@color/melt_green"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/btn_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/game_over"
+            android:textSize="@dimen/board_txt"
+            android:textColor="@color/melt_red"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="5px"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/white"
+        android:showDividers="beginning">
+
+        <TextView
+            android:id="@+id/home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="HOME"
+            android:gravity="center"
+            android:textSize="20pt"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/away"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="AWAY"
+            android:textSize="20pt"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="5px"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="@dimen/imgheight"
+                android:gravity="center"
+                android:id="@+id/linearLayout1"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
+
+                <TextView
+                    android:id="@+id/score_txt1"
+                    android:layout_width="@dimen/imgwidth"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:gravity="center"
+                    android:textSize="@dimen/score_num"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:id="@+id/score_txt2"
+                    android:layout_width="@dimen/imgwidth"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:gravity="center"
+                    android:textSize="@dimen/score_num"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
+
+            </LinearLayout>
+
+
+
+
+
+            <TextView
+                android:id="@+id/txt1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="0"
+                android:textSize="40pt"
+                android:layout_alignBottom="@+id/linearLayout1"
+                android:layout_toEndOf="@+id/linearLayout1" />
+
+            <TextView
+                android:id="@+id/txt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:text="0"
+                android:textSize="40pt"
+                android:layout_alignBottom="@+id/linearLayout2"
+                android:layout_toStartOf="@+id/linearLayout2" />
+
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="@dimen/imgheight"
+                android:gravity="center"
+                android:id="@+id/linearLayout2"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true">
+
+                <TextView
+                    android:id="@+id/score_txt3"
+                    android:layout_width="@dimen/imgwidth"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textSize="@dimen/score_num"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
+                <TextView
+                    android:id="@+id/score_txt4"
+                    android:layout_width="@dimen/imgwidth"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textSize="@dimen/score_num"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn1up"
+                android:layout_width="@dimen/btnwidth"
+                android:layout_height="@dimen/btnheight"
+                android:background="@drawable/round_shape"
+                android:text="+2"
+                android:textSize="@dimen/setting_num"/>
+            <Button
+                android:id="@+id/btn2up"
+                android:layout_width="@dimen/btnwidth"
+                android:layout_height="@dimen/btnheight"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@id/btn1up"
+                android:background="@drawable/round_shape"
+                android:text="+3"
+                android:textSize="@dimen/setting_num"/>
+
+            <TextView
+                android:id="@+id/btn_undo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/score_undo"
+                android:textSize="@dimen/board_txt"
+                android:textColor="@color/melt_yellow"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:id="@+id/btn3up"
+                android:layout_width="@dimen/btnwidth"
+                android:layout_height="@dimen/btnheight"
+                android:text="+2"
+                android:textSize="@dimen/setting_num"
+                android:background="@drawable/round_shape"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/btn4up" />
+            <Button
+                android:id="@+id/btn4up"
+                android:layout_width="@dimen/btnwidth"
+                android:layout_height="@dimen/btnheight"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:text="+3"
+                android:textSize="@dimen/setting_num"
+                android:background="@drawable/round_shape"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
