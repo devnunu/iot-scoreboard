@@ -28,7 +28,7 @@ public class AppSettings {
 	private static boolean mIsInitialized = false;
 	private static Context mContext;
 	
-	// Setting values
+	// Set values
 	private static boolean mUseBackgroundService;
 	
 	

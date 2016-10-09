@@ -338,7 +338,7 @@ public class BLE_Connect extends Activity implements View.OnClickListener {
                                     getResources().getString(R.string.bt_state_connected) + " no name");
                             mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_online));
                         }
-                        intent = new Intent(BLE_Connect.this, BLE_ScoreMode.class);
+                        intent = new Intent(BLE_Connect.this, BLE_Setting.class);
                         startActivity(intent);
                     }
                     break;

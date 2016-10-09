@@ -6,14 +6,14 @@ import java.util.ArrayList;
 /**
  * Created by new on 2016. 9. 10..
  */
-public class GameInfo implements Serializable {
+public class Game_Info implements Serializable {
 
     private ArrayList HomeScore = new ArrayList();
     private ArrayList AwayScore = new ArrayList();
     private int Round = 0;
     private int Goal_Round = 0;
 
-    public GameInfo(){
+    public Game_Info(){
         for(int i=0; i<4; i++){
             HomeScore.add(i,0);
             AwayScore.add(i,0);

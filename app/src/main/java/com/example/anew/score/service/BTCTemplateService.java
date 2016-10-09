@@ -184,7 +184,7 @@ public class BTCTemplateService extends Service {
 	}
 	
 	/**
-	 * Setting up bluetooth connection
+	 * bluetooth connection
 	 * @param h
 	 */
 	public void setupService(Handler h) {

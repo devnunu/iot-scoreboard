@@ -6,19 +6,16 @@ package com.example.anew.score;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-public class ScoreMode extends Activity implements View.OnClickListener{
+public class Com_ScoreMode extends Activity implements View.OnClickListener{
 
     // 버튼 컴포넌트 생성
     private Button btn1;
@@ -71,7 +68,7 @@ public class ScoreMode extends Activity implements View.OnClickListener{
     private int A_win = 0;
 
     // 스코어 정보 저장 객체
-    private GameInfo RoundScore = new GameInfo();
+    private Game_Info RoundScore = new Game_Info();
 
     // 게임 목표 변수 생성
     private int score;
@@ -85,11 +82,17 @@ public class ScoreMode extends Activity implements View.OnClickListener{
     private int undo_num = 0;
     private int[] undo_list = new int[100];
 
+    // 사운드
+    private SoundPool sound1;
+    private int soundID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.scoremode);
+        setContentView(R.layout.com_scoremode);
+
+        sound1 = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        soundID = sound1.load(this, R.raw.coin, 1);
 
         // 취소의 리스트의 초기값 설정
         undo_list[0] = Init;
@@ -123,6 +126,7 @@ public class ScoreMode extends Activity implements View.OnClickListener{
                         undo_list[undo_num] = Left_2up;
                         score_txt1.setText(String.format("%d", sum1_num/10));
                         score_txt2.setText(String.format("%d", sum1_num%10));
+                        sound1.play(soundID,1f,1f,0,0,1f);
                     }
 
                 break;
@@ -140,6 +144,7 @@ public class ScoreMode extends Activity implements View.OnClickListener{
                         undo_list[undo_num] = Left_3up;
                         score_txt1.setText(String.format("%d", sum1_num/10));
                         score_txt2.setText(String.format("%d", sum1_num%10));
+                        sound1.play(soundID,1f,1f,0,0,1f);
                     }
                 break;
 
@@ -155,6 +160,7 @@ public class ScoreMode extends Activity implements View.OnClickListener{
                         undo_list[undo_num] = Right_2up;
                         score_txt3.setText(String.format("%d", sum2_num/10));
                         score_txt4.setText(String.format("%d", sum2_num%10));
+                        sound1.play(soundID,1f,1f,0,0,1f);
                     }
                 break;
 
@@ -170,6 +176,7 @@ public class ScoreMode extends Activity implements View.OnClickListener{
                         undo_list[undo_num] = Right_3up;
                         score_txt3.setText(String.format("%d", sum2_num/10));
                         score_txt4.setText(String.format("%d", sum2_num%10));
+                        sound1.play(soundID,1f,1f,0,0,1f);
                     }
                 break;
 
@@ -221,7 +228,7 @@ public class ScoreMode extends Activity implements View.OnClickListener{
 
 
             case R.id.btn_score:
-                intent = new Intent(getBaseContext(), GameResult.class);
+                intent = new Intent(getBaseContext(), Game_Result.class);
                 intent.putExtra("RoundScore", RoundScore);
                 startActivityForResult(intent, 1);
                 break;
@@ -304,7 +311,7 @@ public class ScoreMode extends Activity implements View.OnClickListener{
         // 목표 라운드에 진입시
         if(round_Status==round-1){
             round_Status = 0;
-            intent = new Intent(getBaseContext(), GameResult.class);
+            intent = new Intent(getBaseContext(), Game_Result.class);
             intent.putExtra("RoundScore", RoundScore);
             startActivityForResult(intent,1);
             finish();

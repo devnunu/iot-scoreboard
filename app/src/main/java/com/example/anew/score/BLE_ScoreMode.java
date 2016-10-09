@@ -11,25 +11,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.anew.score.service.BTCTemplateService;
 import com.example.anew.score.utils.Constants;
-
-import org.w3c.dom.Text;
 
 import java.util.Timer;
 
@@ -83,7 +78,7 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
     private int A_win = 0;
 
     // 스코어 정보 저장 객체
-    private GameInfo RoundScore = new GameInfo();
+    private Game_Info RoundScore = new Game_Info();
 
     // 게임 목표 변수 생성
     private int score;
@@ -92,6 +87,9 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
     //상태 변수
     private boolean State = false;
 
+    // 사운드
+    private SoundPool sound1;
+    private int soundID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,13 +102,15 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
 
         setting();
 
+        sound1 = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        soundID = sound1.load(this, R.raw.coin, 1);
 
-        // setting 액티비티로부터 값 받아옴
-        //intent = getIntent();
-        //score = intent.getExtras().getInt("score");
-        //round = intent.getExtras().getInt("round");
-        score=20;
-        round = 4;
+        // BLE_setting 액티비티로부터 값 받아옴
+        intent = getIntent();
+        score = intent.getExtras().getInt("score");
+        round = intent.getExtras().getInt("round");
+        //score=20;
+        //round = 4;
         RoundScore.setGoal_Round(round);
 
         // Do data initialization after service started and binded
@@ -136,7 +136,7 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
 
 
             case R.id.btn_score:
-                intent = new Intent(getBaseContext(), GameResult.class);
+                intent = new Intent(getBaseContext(), Game_Result.class);
                 intent.putExtra("RoundScore", RoundScore);
                 startActivityForResult(intent, 1);
                 break;
@@ -218,7 +218,7 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
         // 목표 라운드에 진입시
         if(round_Status==round-1){
             round_Status = 0;
-            intent = new Intent(getBaseContext(), GameResult.class);
+            intent = new Intent(getBaseContext(), Game_Result.class);
             intent.putExtra("RoundScore", RoundScore);
             startActivityForResult(intent,1);
             finish();
@@ -238,6 +238,7 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
 
             if(message.equals("aa")){
                 sum1_num += 1;
+                sound1.play(soundID,1f,1f,0,0,1f);
 
                 if (sum1_num >= score) {
                     gameEnd();
@@ -248,6 +249,7 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
             }
             else if(message.equals("bb")){
                 sum2_num += 1;
+                sound1.play(soundID,1f,1f,0,0,1f);
 
                 if (sum2_num >= score) {
                     gameEnd();

@@ -6,16 +6,14 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.Button;
 import android.widget.TextView;
 
 /**
  * Created by new on 2016. 9. 6..
  */
-public class Intro extends Activity {
+public class Intro_Title extends Activity {
 
     private TextView txt1;
     private TextView txt2;
@@ -27,7 +25,7 @@ public class Intro extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.intro);
+        setContentView(R.layout.intro_title);
 
         // 취소 버튼 핸들러 연결
         backPressCloseHandler = new BackPressCloseHandler(this);
@@ -59,7 +57,7 @@ public class Intro extends Activity {
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
-                        intent = new Intent(getBaseContext(), BLE_Connect.class);
+                        intent = new Intent(getBaseContext(), Intro_menu.class);
                         startActivityForResult(intent, 1);
                         finish();
                     }

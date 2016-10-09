@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.anew.score.Intro;
-import com.example.anew.score.Login;
+import com.example.anew.score.Intro_Title;
+import com.example.anew.score.Intro_Login;
 import com.kakao.auth.ErrorCode;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
@@ -71,14 +71,14 @@ public class KakaoSignupActivity extends Activity{
     }
 
     private void redirectMainActivity(String url, String nickname) {
-        Intent intent = new Intent(KakaoSignupActivity.this, Intro.class);
+        Intent intent = new Intent(KakaoSignupActivity.this, Intro_Title.class);
         intent.putExtra("url", url);
         intent.putExtra("nickname", nickname);
         startActivity(intent);
         finish();
     }
     protected void redirectLoginActivity() {
-        final Intent intent = new Intent(this, Login.class);
+        final Intent intent = new Intent(this, Intro_Login.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         finish();

@@ -15,7 +15,7 @@ import com.kakao.util.helper.log.Logger;
 /**
  * Created by hp on 2016-01-26.
  */
-public class Login extends Activity {
+public class Intro_Login extends Activity {
 
     private SessionCallback callback;      //콜백 선언
     private TextView txt1;

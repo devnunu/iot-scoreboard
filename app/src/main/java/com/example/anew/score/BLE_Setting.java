@@ -11,14 +11,11 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.ToggleButton;
-
-import org.w3c.dom.Text;
 
 /**
- * Created by new on 2016. 9. 6..
+ * Created by new on 2016. 10. 10..
  */
-public class Setting extends Activity {
+public class BLE_Setting extends Activity {
 
     // 텍스트 컴포넌트 연결
     private TextView Setting;
@@ -60,7 +57,7 @@ public class Setting extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.setting);
+        setContentView(R.layout.com_setting);
 
         // 텍스트 컴포넌트
         Setting = (TextView) findViewById(R.id.setting);
@@ -185,7 +182,7 @@ public class Setting extends Activity {
                             Handler handler1 = new Handler();
                             handler1.postDelayed(new Runnable() {
                                 public void run() {
-                                    intent = new Intent(getBaseContext(), ScoreMode.class);
+                                    intent = new Intent(getBaseContext(), BLE_ScoreMode.class);
                                     intent.putExtra("score",score);
                                     intent.putExtra("round", round);
                                     startActivityForResult(intent, 1);
@@ -207,7 +204,7 @@ public class Setting extends Activity {
                             Handler handler2 = new Handler();
                             handler2.postDelayed(new Runnable() {
                                 public void run() {
-                                    intent = new Intent(getBaseContext(), TimeMode.class);
+                                    intent = new Intent(getBaseContext(), BLE_TimeMode.class);
                                     intent.putExtra("time",(min*60));
                                     intent.putExtra("round", round);
                                     startActivityForResult(intent, 1);
@@ -215,7 +212,7 @@ public class Setting extends Activity {
                                 }
                             }, 800);
                             break;
-                }
+                    }
 
                     break;
                 case R.id.mode_btn:

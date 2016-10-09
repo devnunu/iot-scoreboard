@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.Serializable;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by new on 2016. 9. 10..
  */
-public class GameResult extends Activity implements Serializable, View.OnClickListener {
+public class Game_Result extends Activity implements Serializable, View.OnClickListener {
 
     // 텍스트뷰 컴포넌트 연결
     private TextView Home;
@@ -52,13 +51,13 @@ public class GameResult extends Activity implements Serializable, View.OnClickLi
     private int goal_round;
 
     // 스코어 객체 생성
-    private GameInfo RoundScore;
+    private Game_Info RoundScore;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gameresult);
+        setContentView(R.layout.game_result);
 
         Home = (TextView)findViewById(R.id.home);
         Away = (TextView)findViewById(R.id.away);
@@ -102,7 +101,7 @@ public class GameResult extends Activity implements Serializable, View.OnClickLi
 
         // 그 전액티비티에서 받아온 스코어
         intent = getIntent();
-        RoundScore = (GameInfo)intent.getSerializableExtra("RoundScore");
+        RoundScore = (Game_Info)intent.getSerializableExtra("RoundScore");
 
 
         // 스코어 저장
@@ -176,7 +175,7 @@ public class GameResult extends Activity implements Serializable, View.OnClickLi
         switch (view.getId()){
             case R.id.score_done:
                 if(Round==goal_round-1) {
-                    intent = new Intent(getBaseContext(), Intro.class);
+                    intent = new Intent(getBaseContext(), Intro_Title.class);
                     startActivityForResult(intent, 1);
                     finish();
                 }
