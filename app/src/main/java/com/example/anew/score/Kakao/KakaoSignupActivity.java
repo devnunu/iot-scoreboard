@@ -1,4 +1,4 @@
-package com.example.anew.score;
+package com.example.anew.score.Kakao;
 
 
 import android.app.Activity;
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.anew.score.Intro;
+import com.example.anew.score.Login;
 import com.kakao.auth.ErrorCode;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;

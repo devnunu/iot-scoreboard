@@ -3,9 +3,12 @@
     package="com.example.anew.score">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
 
     <application
-        android:name=".GlobalApplication"
+        android:name=".Kakao.GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -28,11 +31,29 @@
         <activity android:name=".GameResult"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"></activity>
+        <activity android:name=".DeviceListActivity"
+            android:label="@string/select_device"
+            android:theme="@android:style/Theme.Dialog"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </activity>
         <activity android:name=".Intro"></activity>
-        <activity android:name=".KakaoSignupActivity"></activity>
+        <activity android:name=".Kakao.KakaoSignupActivity"></activity>
+        <activity android:name=".BLE_Connect"></activity>
+        <activity android:name=".BLE_ScoreMode"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"></activity>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
+
+        <!-- Service -->
+        <service
+            android:name="com.example.anew.score.service.BTCTemplateService"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </service>
+
+        <!-- Broadcast receiver -->
+        <receiver android:name="com.example.anew.score.service.ServiceMonitoring$ServiceMonitoringBR" />
     </application>
 
 </manifest>

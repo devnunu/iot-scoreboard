@@ -59,7 +59,7 @@ public class Intro extends Activity {
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
-                        intent = new Intent(getBaseContext(), Setting.class);
+                        intent = new Intent(getBaseContext(), BLE_Connect.class);
                         startActivityForResult(intent, 1);
                         finish();
                     }

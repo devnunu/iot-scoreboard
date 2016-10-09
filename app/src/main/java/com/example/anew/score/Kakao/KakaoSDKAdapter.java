@@ -1,4 +1,4 @@
-package com.example.anew.score;
+package com.example.anew.score.Kakao;
 
 /**
  * Created by moonsu on 2016-02-10.
