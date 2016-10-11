@@ -2,6 +2,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
     <dimen name="btnheight">50dp</dimen>
     <dimen name="btnwidth">90dp</dimen>
 
@@ -20,4 +21,7 @@
     <dimen name="result_txt">20pt</dimen>
 
     <dimen name="score_num">80pt</dimen>
+
+    <dimen name="ble_score_num">110pt</dimen>
+    <dimen name="ble_height">180dp</dimen>
 </resources>

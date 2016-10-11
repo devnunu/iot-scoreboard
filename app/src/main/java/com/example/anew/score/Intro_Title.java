@@ -3,6 +3,8 @@ package com.example.anew.score;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -21,6 +23,8 @@ public class Intro_Title extends Activity {
     private Intent intent;
     private BackPressCloseHandler backPressCloseHandler;
 
+    private SoundPool sound1;
+    private int soundID1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,10 @@ public class Intro_Title extends Activity {
         txt2.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
         mbtn.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
 
+        // 사운드 세팅
+        sound1 = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        soundID1 = sound1.load(this, R.raw.smw_kick, 1);
+
         // 클릭 리스너 등록
         mbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +60,9 @@ public class Intro_Title extends Activity {
                 anim.setRepeatMode(Animation.REVERSE);
                 anim.setRepeatCount(Animation.INFINITE);
                 mbtn.startAnimation(anim);
+
+                // 클릭 사운드
+                sound1.play(soundID1,1f,1f,0,0,1f);
 
                 // 1초간 딜레이 후 다음 액티비티 진입
                 Handler handler = new Handler();

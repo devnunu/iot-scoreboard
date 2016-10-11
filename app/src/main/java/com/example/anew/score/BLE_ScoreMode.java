@@ -62,6 +62,8 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
 
     // 취소 변수
     final static int Init = 0;
+    final static int H_up = 1;
+    final static int A_up = 2;
     int undo_Status = Init;
 
     // 라운드 변수
@@ -86,6 +88,10 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
 
     //상태 변수
     private boolean State = false;
+
+    // 취소 리스트
+    private int undo_num = 0;
+    private int[] undo_list = new int[100];
 
     // 사운드
     private SoundPool sound1;
@@ -123,17 +129,6 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
     public void onClick(View v) {
 
         switch (v.getId()) {
-
-            // 취소 버튼 클릭시
-            case R.id.btn_undo:
-                // 이전에 누른 기능별로 분류
-                switch (undo_Status) {
-                    case Init:
-                        break;
-
-                }
-                break;
-
 
             case R.id.btn_score:
                 intent = new Intent(getBaseContext(), Game_Result.class);
@@ -181,6 +176,7 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
         RoundScore.setRound(round_Status);
 
         // 취소 초기화
+        undo_num = 0;
         undo_Status = Init;
 
         // 라운드 스코어 처리
@@ -236,26 +232,59 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
     public void showMessage(String message) {
         if (message != null && message.length() > 0) {
 
-            if(message.equals("aa")){
+            if(message.equals("hn1")){
                 sum1_num += 1;
+                undo_num++;
                 sound1.play(soundID,1f,1f,0,0,1f);
 
                 if (sum1_num >= score) {
                     gameEnd();
                 } else {
+                    // 현재 상태 및 취소 리스트 동작 등록
+                    undo_Status = H_up;
+                    undo_list[undo_num] = H_up;
                     score_txt1.setText(String.format("%d", sum1_num/10));
                     score_txt2.setText(String.format("%d", sum1_num%10));
                 }
             }
-            else if(message.equals("bb")){
+            else if(message.equals("an1")){
                 sum2_num += 1;
+                undo_num++;
                 sound1.play(soundID,1f,1f,0,0,1f);
 
                 if (sum2_num >= score) {
                     gameEnd();
                 } else {
+                    // 현재 상태 및 취소 리스트 동작 등록
+                    undo_Status = A_up;
+                    undo_list[undo_num] = A_up;
                     score_txt3.setText(String.format("%d", sum2_num/10));
                     score_txt4.setText(String.format("%d", sum2_num%10));
+                }
+            }
+            else if(message.equals("cc")){
+                switch (undo_Status) {
+                    case Init:
+                        break;
+
+                    case H_up:
+                        sum1_num -= 1;
+                        undo_num--;
+
+                        undo_Status = undo_list[undo_num];
+                        score_txt1.setText(String.format("%d", sum1_num / 10));
+                        score_txt2.setText(String.format("%d", sum1_num % 10));
+                        break;
+
+                    case A_up:
+                        sum2_num -= 1;
+                        undo_num--;
+
+                        undo_Status = undo_list[undo_num];
+                        score_txt3.setText(String.format("%d", sum2_num / 10));
+                        score_txt4.setText(String.format("%d", sum2_num % 10));
+                        break;
+
                 }
             }
 
@@ -367,7 +396,6 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
         score_txt3 = (TextView)findViewById(R.id.score_txt3);
         score_txt4 = (TextView)findViewById(R.id.score_txt4);
 
-        btnUndo = (TextView) findViewById(R.id.btn_undo);
         btnScore = (TextView) findViewById(R.id.btn_score);
         btnEnd = (TextView) findViewById(R.id.btn_end);
 
@@ -383,15 +411,12 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
         score_txt3.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
         score_txt4.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
 
-        btnUndo.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
         btnScore.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
         btnEnd.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
 
 
 
         // 버튼 클릭 이벤트 리스너 등록
-
-        btnUndo.setOnClickListener(this);
         btnScore.setOnClickListener(this);
         btnEnd.setOnClickListener(this);
 

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -47,7 +49,8 @@ public class BLE_Setting extends Activity {
     final static int Time_mode = 2;
     int cur_Status = Score_mode;
 
-
+    private SoundPool sound1;
+    private int soundID1;
 
     private Intent intent;
 
@@ -107,6 +110,10 @@ public class BLE_Setting extends Activity {
 
         mConfirm.setOnClickListener(mClickListener);
         mode_btn.setOnClickListener(mClickListener);
+
+        // 사운드 세팅
+        sound1 = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        soundID1 = sound1.load(this, R.raw.smw_kick, 1);
     }
     Button.OnClickListener mClickListener = new View.OnClickListener() {
         public void onClick(View v) {
@@ -217,7 +224,6 @@ public class BLE_Setting extends Activity {
                     break;
                 case R.id.mode_btn:
                     if(cur_Status==Score_mode){
-                        //mode_btn.setBackgroundColor(Color.BLUE);
                         Time.setEnabled(true);
                         min_up.setEnabled(true);
                         min_down.setEnabled(true);
@@ -229,9 +235,11 @@ public class BLE_Setting extends Activity {
                         mode_btn.setText("시  간");
                         mode_btn.setTextColor(Color.MAGENTA);
                         cur_Status = Time_mode;
+
+                        // 클릭 사운드
+                        sound1.play(soundID1,1f,1f,0,0,1f);
                     }
                     else{
-                        //mode_btn.setBackgroundColor(Color.RED);
                         Time.setEnabled(false);
                         min_up.setEnabled(false);
                         min_down.setEnabled(false);
@@ -243,6 +251,9 @@ public class BLE_Setting extends Activity {
                         mode_btn.setText("스코어");
                         mode_btn.setTextColor(Color.RED);
                         cur_Status = Score_mode;
+
+                        // 클릭 사운드
+                        sound1.play(soundID1,1f,1f,0,0,1f);
                     }
                     break;
             }

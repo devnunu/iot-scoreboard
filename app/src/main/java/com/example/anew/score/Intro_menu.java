@@ -3,6 +3,8 @@ package com.example.anew.score;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -21,6 +23,8 @@ public class Intro_menu extends Activity implements View.OnClickListener {
     private Intent intent;
     private BackPressCloseHandler backPressCloseHandler;
 
+    private SoundPool sound1;
+    private int soundID1;
 
     @Override
     public void onClick(View view) {
@@ -33,6 +37,9 @@ public class Intro_menu extends Activity implements View.OnClickListener {
                 anim1.setRepeatMode(Animation.REVERSE);
                 anim1.setRepeatCount(Animation.INFINITE);
                 menu1.startAnimation(anim1);
+
+                // 클릭 사운드
+                sound1.play(soundID1,1f,1f,0,0,1f);
 
                 // 1초간 딜레이 후 다음 액티비티 진입
                 Handler handler1 = new Handler();
@@ -52,6 +59,9 @@ public class Intro_menu extends Activity implements View.OnClickListener {
                 anim2.setRepeatMode(Animation.REVERSE);
                 anim2.setRepeatCount(Animation.INFINITE);
                 menu2.startAnimation(anim2);
+
+                // 클릭 사운드
+                sound1.play(soundID1,1f,1f,0,0,1f);
 
                 // 1초간 딜레이 후 다음 액티비티 진입
                 Handler handler2 = new Handler();
@@ -85,6 +95,10 @@ public class Intro_menu extends Activity implements View.OnClickListener {
         // 클릭 리스너 등록
         menu1.setOnClickListener(this);
         menu2.setOnClickListener(this);
+
+        // 사운드 세팅
+        sound1 = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        soundID1 = sound1.load(this, R.raw.smw_kick, 1);
 
     }
 

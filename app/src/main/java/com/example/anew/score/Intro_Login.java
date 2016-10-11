@@ -37,6 +37,7 @@ public class Intro_Login extends Activity {
         callback = new SessionCallback();                  // 이 두개의 함수 중요함
         Session.getCurrentSession().addCallback(callback);
 
+
     }
 
     @Override
