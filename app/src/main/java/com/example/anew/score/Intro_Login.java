@@ -18,21 +18,12 @@ import com.kakao.util.helper.log.Logger;
 public class Intro_Login extends Activity {
 
     private SessionCallback callback;      //콜백 선언
-    private TextView txt1;
-    private TextView txt2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.intro_login);
-
-        txt1 = (TextView) findViewById(R.id.txt1);
-        txt2 = (TextView) findViewById(R.id.txt2);
-
-        //글꼴 변경
-        txt1.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
-        txt2.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
 
         callback = new SessionCallback();                  // 이 두개의 함수 중요함
         Session.getCurrentSession().addCallback(callback);
@@ -67,12 +58,6 @@ public class Intro_Login extends Activity {
                 Logger.e(exception);
             }
             setContentView(R.layout.intro_login); // 세션 연결이 실패했을때
-
-            txt1 = (TextView) findViewById(R.id.txt1);
-            txt2 = (TextView) findViewById(R.id.txt2);
-
-            txt1.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
-            txt2.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
         }                                            // 로그인화면을 다시 불러옴
     }
 

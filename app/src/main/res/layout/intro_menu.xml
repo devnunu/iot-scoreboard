@@ -4,28 +4,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/activity_vertical_margin"
-    android:background="@drawable/bg1"
+    android:background="@drawable/bg_menu"
     android:gravity="center">
 
 
 
-    <TextView
-        android:id="@+id/menu1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="디스플레이 모드"
-        android:textSize="25pt"
-        android:textColor="@color/melt_black"
-        android:layout_gravity="center_horizontal" />
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/menu2"
-        android:paddingTop="30dp"
-        android:layout_width="wrap_content"
+        <ImageButton
+            android:id="@+id/menu1"
+            android:layout_width="1000px"
+            android:layout_height="200px"
+            android:background="@drawable/form_button_display"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="디바이스 모드"
-        android:textSize="25pt"
-        android:textColor="@color/melt_black"
-        android:layout_gravity="center_horizontal" />
+        android:gravity="center"
+        android:paddingTop="30dp">
+
+        <ImageButton
+            android:id="@+id/menu2"
+            android:layout_width="900px"
+            android:layout_height="200px"
+            android:background="@drawable/form_button_device"
+            android:layout_gravity="center_horizontal" />
+
+
+    </LinearLayout>
+
 
 </LinearLayout>

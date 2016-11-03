@@ -4,37 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/activity_vertical_margin"
-    android:background="@drawable/bg1">
+    android:background="@drawable/bg_intro">
 
-    <TextView
-        android:id="@+id/txt1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="모두의"
-        android:textSize="40pt"
-        android:textColor="@color/title1"
-        android:paddingTop="70dp"
-        android:layout_gravity="center_horizontal" />
-    <TextView
-        android:id="@+id/txt2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:text="스포오-츠!"
-        android:textSize="40pt"
-        android:textColor="@color/title2"
-        android:paddingBottom="80dp"
-        android:layout_gravity="center_horizontal" />
 
     <com.kakao.usermgmt.LoginButton
         android:id="@+id/com_kakao_login"
+        android:paddingTop="350dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_gravity="center_horizontal|center_vertical"/>
+        android:layout_marginRight="20dp"/>
 
 </LinearLayout>

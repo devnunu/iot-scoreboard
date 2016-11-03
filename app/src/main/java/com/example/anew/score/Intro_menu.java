@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 /**
@@ -18,8 +19,8 @@ import android.widget.TextView;
 public class Intro_menu extends Activity implements View.OnClickListener {
 
 
-    private TextView menu1;
-    private TextView menu2;
+    private ImageButton menu1;
+    private ImageButton menu2;
     private Intent intent;
     private BackPressCloseHandler backPressCloseHandler;
 
@@ -30,13 +31,6 @@ public class Intro_menu extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.menu1:
-                // 깜빡이는 애니메이션
-                Animation anim1 = new AlphaAnimation(0.0f, 1.0f);
-                anim1.setDuration(50); //You can manage the time of the blink with this parameter
-                anim1.setStartOffset(20);
-                anim1.setRepeatMode(Animation.REVERSE);
-                anim1.setRepeatCount(Animation.INFINITE);
-                menu1.startAnimation(anim1);
 
                 // 클릭 사운드
                 sound1.play(soundID1,1f,1f,0,0,1f);
@@ -52,13 +46,6 @@ public class Intro_menu extends Activity implements View.OnClickListener {
                 }, 800);
                 break;
             case R.id.menu2:
-                // 깜빡이는 애니메이션
-                Animation anim2 = new AlphaAnimation(0.0f, 1.0f);
-                anim2.setDuration(50); //You can manage the time of the blink with this parameter
-                anim2.setStartOffset(20);
-                anim2.setRepeatMode(Animation.REVERSE);
-                anim2.setRepeatCount(Animation.INFINITE);
-                menu2.startAnimation(anim2);
 
                 // 클릭 사운드
                 sound1.play(soundID1,1f,1f,0,0,1f);
@@ -85,12 +72,8 @@ public class Intro_menu extends Activity implements View.OnClickListener {
         backPressCloseHandler = new BackPressCloseHandler(this);
 
         // 텍스트 컴포넌트 연결
-        menu1 = (TextView)findViewById(R.id.menu1);
-        menu2 = (TextView)findViewById(R.id.menu2);
-
-        // 글꼴 변경
-        menu1.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
-        menu2.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
+        menu1 = (ImageButton)findViewById(R.id.menu1);
+        menu2 = (ImageButton)findViewById(R.id.menu2);
 
         // 클릭 리스너 등록
         menu1.setOnClickListener(this);

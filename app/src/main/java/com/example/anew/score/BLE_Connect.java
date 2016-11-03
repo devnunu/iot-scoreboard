@@ -88,7 +88,7 @@ public class BLE_Connect extends Activity implements View.OnClickListener {
         txt_scan = (TextView)findViewById(R.id.txt_scan);
         txt_scan.setOnClickListener(this);
 
-        txt_scan.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
+        txt_scan.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
 
         // Setup views
         mImageBT = (ImageView) findViewById(R.id.status_title);
