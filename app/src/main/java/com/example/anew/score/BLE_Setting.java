@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 /**
@@ -20,27 +21,20 @@ import android.widget.TextView;
 public class BLE_Setting extends Activity {
 
     // 텍스트 컴포넌트 연결
-    private TextView Setting;
 
     private TextView mTime;
     private TextView mScore;
     private TextView mRound;
 
-    private TextView Mode;
-    private TextView Round;
-    private TextView Time;
-    private TextView Score;
-
-    private TextView mConfirm;
+    private ImageButton mConfirm;
 
     // 버튼 컴포넌트 연결
-    private Button min_up;
-    private Button min_down;
-    private Button round_up;
-    private Button round_down;
-    private Button score_up;
-    private Button score_down;
-
+    private ImageButton min_up;
+    private ImageButton min_down;
+    private ImageButton round_up;
+    private ImageButton round_down;
+    private ImageButton score_up;
+    private ImageButton score_down;
 
     // 토글 버튼 컴포넌트 연결
     private TextView mode_btn;
@@ -63,42 +57,31 @@ public class BLE_Setting extends Activity {
         setContentView(R.layout.com_setting);
 
         // 텍스트 컴포넌트
-        Setting = (TextView) findViewById(R.id.setting);
         mTime = (TextView) findViewById(R.id.value_time);
         mScore = (TextView) findViewById(R.id.value_score);
         mRound = (TextView) findViewById(R.id.value_round);
 
-        Mode = (TextView)findViewById(R.id.txt_mode);
-        Round = (TextView) findViewById(R.id.txt_round);
-        Time = (TextView) findViewById(R.id.txt_time);
-        Score = (TextView) findViewById(R.id.txt_score);
-
         // 버튼 컴포넌트
-        min_up = (Button)findViewById(R.id.min_up);
-        min_down = (Button)findViewById(R.id.min_down);
-        round_up = (Button)findViewById(R.id.round_up);
-        round_down = (Button)findViewById(R.id.round_down);
-        score_up = (Button)findViewById(R.id.score_up);
-        score_down = (Button)findViewById(R.id.score_down);
+        min_up = (ImageButton)findViewById(R.id.min_up);
+        min_down = (ImageButton)findViewById(R.id.min_down);
+        round_up = (ImageButton)findViewById(R.id.round_up);
+        round_down = (ImageButton)findViewById(R.id.round_down);
+        score_up = (ImageButton)findViewById(R.id.score_up);
+        score_down = (ImageButton)findViewById(R.id.score_down);
 
-        mConfirm = (TextView) findViewById(R.id.confirm_btn);
+        mConfirm = (ImageButton) findViewById(R.id.confirm_btn);
 
         // 토글 컴포넌트
         mode_btn = (TextView) findViewById(R.id.mode_btn);
 
         // 글꼴 등록
-        Setting.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
-        mTime.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
-        mScore.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
-        mRound.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
+        mTime.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
+        mScore.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
+        mRound.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
 
-        Mode.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
-        Round.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
-        Time.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
-        Score.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
+        mode_btn.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
 
-        mode_btn.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
-        mConfirm.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
+        mConfirm.setBackground(getDrawable(R.drawable.form_button_ready));
 
         // 버튼 클릭 이벤트 리스너 등록
         min_up.setOnClickListener(mClickListener);
@@ -120,6 +103,8 @@ public class BLE_Setting extends Activity {
 
             switch (v.getId()) {
                 case R.id.min_up:
+                    // 클릭 사운드
+                    sound1.play(soundID1,1f,1f,0,0,1f);
                     if(min>59){
                         min=1;
                         mTime.setText(String.valueOf(min));
@@ -131,6 +116,8 @@ public class BLE_Setting extends Activity {
                     break;
 
                 case R.id.min_down:
+                    // 클릭 사운드
+                    sound1.play(soundID1,1f,1f,0,0,1f);
                     if (min > 1) {
                         min--;
                         mTime.setText(String.valueOf(min));
@@ -138,6 +125,8 @@ public class BLE_Setting extends Activity {
                     break;
 
                 case R.id.round_up:
+                    // 클릭 사운드
+                    sound1.play(soundID1,1f,1f,0,0,1f);
                     if(round>3){
                         round = 1;
                         mRound.setText(String.valueOf(round));
@@ -149,6 +138,8 @@ public class BLE_Setting extends Activity {
                     break;
 
                 case R.id.round_down:
+                    // 클릭 사운드
+                    sound1.play(soundID1,1f,1f,0,0,1f);
                     if(round>1){
                         round--;
                         mRound.setText(String.valueOf(round));
@@ -156,6 +147,8 @@ public class BLE_Setting extends Activity {
                     break;
 
                 case R.id.score_up:
+                    // 클릭 사운드
+                    sound1.play(soundID1,1f,1f,0,0,1f);
                     if(score>99) {
                         score=10;
                         mScore.setText(String.valueOf(score));
@@ -167,6 +160,8 @@ public class BLE_Setting extends Activity {
                     break;
 
                 case R.id.score_down:
+                    // 클릭 사운드
+                    sound1.play(soundID1,1f,1f,0,0,1f);
                     if(score>10){
                         score--;
                         mScore.setText(String.valueOf(score));
@@ -177,13 +172,8 @@ public class BLE_Setting extends Activity {
                     switch (cur_Status){
                         case Score_mode:
 
-                            // 깜빡이는 애니메이션
-                            Animation anim1 = new AlphaAnimation(0.0f, 1.0f);
-                            anim1.setDuration(50); //You can manage the time of the blink with this parameter
-                            anim1.setStartOffset(20);
-                            anim1.setRepeatMode(Animation.REVERSE);
-                            anim1.setRepeatCount(Animation.INFINITE);
-                            mConfirm.startAnimation(anim1);
+                            // 클릭 사운드
+                            sound1.play(soundID1,1f,1f,0,0,1f);
 
                             // 1초간 딜레이 후 다음 액티비티 진입
                             Handler handler1 = new Handler();
@@ -199,13 +189,9 @@ public class BLE_Setting extends Activity {
                             break;
 
                         case Time_mode:
-                            // 깜빡이는 애니메이션
-                            Animation anim2 = new AlphaAnimation(0.0f, 1.0f);
-                            anim2.setDuration(50); //You can manage the time of the blink with this parameter
-                            anim2.setStartOffset(20);
-                            anim2.setRepeatMode(Animation.REVERSE);
-                            anim2.setRepeatCount(Animation.INFINITE);
-                            mConfirm.startAnimation(anim2);
+
+                            // 클릭 사운드
+                            sound1.play(soundID1,1f,1f,0,0,1f);
 
                             // 1초간 딜레이 후 다음 액티비티 진입
                             Handler handler2 = new Handler();
@@ -224,32 +210,26 @@ public class BLE_Setting extends Activity {
                     break;
                 case R.id.mode_btn:
                     if(cur_Status==Score_mode){
-                        Time.setEnabled(true);
                         min_up.setEnabled(true);
                         min_down.setEnabled(true);
                         mTime.setEnabled(true);
-                        Score.setEnabled(false);
                         score_up.setEnabled(false);
                         score_down.setEnabled(false);
                         mScore.setEnabled(false);
-                        mode_btn.setText("시  간");
-                        mode_btn.setTextColor(Color.MAGENTA);
+                        mode_btn.setBackground(getDrawable(R.drawable.btn_round));
                         cur_Status = Time_mode;
 
                         // 클릭 사운드
                         sound1.play(soundID1,1f,1f,0,0,1f);
                     }
                     else{
-                        Time.setEnabled(false);
                         min_up.setEnabled(false);
                         min_down.setEnabled(false);
                         mTime.setEnabled(false);
-                        Score.setEnabled(true);
                         score_up.setEnabled(true);
                         score_down.setEnabled(true);
                         mScore.setEnabled(true);
-                        mode_btn.setText("스코어");
-                        mode_btn.setTextColor(Color.RED);
+                        mode_btn.setBackground(getDrawable(R.drawable.btn_score));
                         cur_Status = Score_mode;
 
                         // 클릭 사운드

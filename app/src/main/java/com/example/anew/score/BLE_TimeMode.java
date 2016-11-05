@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,11 +35,9 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
     private Timer mRefreshTimer = null;
 
     // 텍스트 컴포넌트 생성
-    private TextView btnUndo;
-    private TextView btnEnd;
-    private TextView btnScore;
+    private ImageButton btnEnd;
+    private ImageButton btnScore;
 
-    private TextView btnConfirm;
     private TextView round_end;
     private TextView round_num;
 
@@ -159,8 +158,7 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
                         cur_Status = Run;
 
                         //State = true;
-                        Swatch.start();
-
+                        Swatch.restart();
                         break;
                 }
                 break;
@@ -178,19 +176,17 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
     }
 
     // 다이얼로그 생성 메소드
-    public void onSucc(){
+    public void onSucc() {
         ShowDialog();
     }
 
-    public void ShowDialog(){
+    public void ShowDialog() {
         input_dlg = new Dialog(this);
         input_dlg.setContentView(R.layout.done_dialog);
 
-        round_end = (TextView)input_dlg.findViewById(R.id.round_end);
         round_num = (TextView)input_dlg.findViewById(R.id.round_num);
 
-        round_end.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
-        round_num.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
+        round_num.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
 
         round_num.setText(String.valueOf(round_Status+1));
         input_dlg.show();
@@ -222,8 +218,8 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
 
             // 지속적으로 시간 값 받아옴
             double ell = Swatch.getFormatF();
-            goal_time = time/60 - (int) ell;
-            String strTime = String.format("%02d:%02d", (int) (goal_time / 60), (int)(goal_time% 60));
+            goal_time = time - (int) ell;
+            String strTime = String.format("%02d:%02d", (int) (goal_time/60), (int)(goal_time % 60));
             Time.setText(strTime);
 
             // 시간 종료시 초기 메소드 실행
@@ -452,24 +448,22 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
         Home_txt = (TextView)findViewById(R.id.home);
         Away_txt = (TextView)findViewById(R.id.away);
 
-        btnScore = (TextView)findViewById(R.id.btn_score);
-        btnEnd = (TextView)findViewById(R.id.btn_end);
+        btnScore = (ImageButton)findViewById(R.id.btn_score);
+        btnEnd = (ImageButton)findViewById(R.id.btn_end);
 
         // 글꼴 연결
-        Home_txt.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
-        Away_txt.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
+        Home_txt.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
+        Away_txt.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
 
-        Time.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
-        txt1.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
-        txt2.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
+        Time.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
+        txt1.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
+        txt2.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
 
-        score_txt1.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
-        score_txt2.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
-        score_txt3.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
-        score_txt4.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
+        score_txt1.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
+        score_txt2.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
+        score_txt3.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
+        score_txt4.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
 
-        btnScore.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
-        btnEnd.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
 
         // 버튼 클릭 이벤트 리스너 등록
         btnScore.setOnClickListener(this);

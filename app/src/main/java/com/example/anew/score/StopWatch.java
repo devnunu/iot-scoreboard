@@ -6,9 +6,11 @@ package com.example.anew.score;
 
 public class StopWatch {
     private long startTime = 0; // 시작시간
-    private long stopTime = 0;  // 종료 시간
+    private long stopTime = System.nanoTime();  // 종료 시간
+    private long pauseTime = 0;
     private long elapsed = 0;
     private boolean running = false;    // 시작되었는지 확인
+    private boolean flag = false;    // 시작되었는지 확인
 
     public void start() {
         this.startTime = System.nanoTime();     // 시간 재기 시작
@@ -18,6 +20,13 @@ public class StopWatch {
     public void stop() {
         this.stopTime = System.nanoTime();
         this.running = false;
+        this.flag=true;
+    }
+
+    public void restart(){
+        pauseTime += System.nanoTime() - stopTime;
+        this.running = true;
+        this.flag = true;
     }
 
     public void reset() {
@@ -46,9 +55,13 @@ public class StopWatch {
     //elaspsed time in milliseconds
     public long getElapsedTimeMilli() {
         if (running) {
-            elapsed = ((System.nanoTime() - startTime) / 1000000);
-        }else{
-            elapsed = ((stopTime - startTime) / 1000000);
+            if(!flag)
+                elapsed = ((System.nanoTime() - startTime) / 100000);
+            else
+                elapsed = (((System.nanoTime() - pauseTime - startTime) / 100000));
+        }
+        else{
+            elapsed = ((stopTime - pauseTime - startTime) / 100000);
         }
 
         return elapsed;
@@ -59,7 +72,7 @@ public class StopWatch {
 
         long ltime = getElapsedTimeMilli();
 
-        double nTime = ltime / 1000.0;
+        double nTime = ltime / 10000.0;
 
         ftime = Double.parseDouble(String.format("%02f", nTime));
 

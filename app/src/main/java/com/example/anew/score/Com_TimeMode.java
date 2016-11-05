@@ -263,7 +263,7 @@ public class Com_TimeMode extends Activity implements View.OnClickListener, Runn
                         cur_Status = Run;
 
                         //State = true;
-                        Swatch.start();
+                        Swatch.restart();
 
                         break;
                 }
@@ -324,7 +324,7 @@ public class Com_TimeMode extends Activity implements View.OnClickListener, Runn
 
             // 지속적으로 시간 값 받아옴
             double ell = Swatch.getFormatF();
-            goal_time = time/60 - (int) ell;
+            goal_time = time - (int) ell;
             String strTime = String.format("%02d:%02d", (int) (goal_time / 60), (int)(goal_time% 60));
             Time.setText(strTime);
 

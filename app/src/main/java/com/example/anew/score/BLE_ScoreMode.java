@@ -20,6 +20,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,11 +39,9 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
     private Timer mRefreshTimer = null;
 
     // 텍스트 컴포넌트 생성
-    private TextView btnUndo;
-    private TextView btnEnd;
-    private TextView btnScore;
+    private ImageButton btnEnd;
+    private ImageButton btnScore;
 
-    private TextView btnConfirm;
     private TextView round_end;
     private TextView round_num;
 
@@ -151,11 +150,9 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
         input_dlg = new Dialog(this);
         input_dlg.setContentView(R.layout.done_dialog);
 
-        round_end = (TextView)input_dlg.findViewById(R.id.round_end);
         round_num = (TextView)input_dlg.findViewById(R.id.round_num);
 
-        round_end.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
-        round_num.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
+        round_num.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
 
         round_num.setText(String.valueOf(round_Status+1));
         input_dlg.show();
@@ -396,23 +393,20 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
         score_txt3 = (TextView)findViewById(R.id.score_txt3);
         score_txt4 = (TextView)findViewById(R.id.score_txt4);
 
-        btnScore = (TextView) findViewById(R.id.btn_score);
-        btnEnd = (TextView) findViewById(R.id.btn_end);
+        btnScore = (ImageButton) findViewById(R.id.btn_score);
+        btnEnd = (ImageButton) findViewById(R.id.btn_end);
 
         // 글꼴 연결
-        Home_txt.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
-        Away_txt.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
+        Home_txt.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
+        Away_txt.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
 
-        txt1.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
-        txt2.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
+        txt1.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
+        txt2.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
 
-        score_txt1.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
-        score_txt2.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
-        score_txt3.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
-        score_txt4.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro Bold.otf"));
-
-        btnScore.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
-        btnEnd.setTypeface(Typeface.createFromAsset(getAssets(),"RixVideoGame_Pro 3D.otf"));
+        score_txt1.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
+        score_txt2.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
+        score_txt3.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
+        score_txt4.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
 
 
 
