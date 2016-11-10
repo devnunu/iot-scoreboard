@@ -125,6 +125,7 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
         round = intent.getExtras().getInt("round");
         goal_time = time;
         RoundScore.setGoal_Round(round);
+        stopService(new Intent(getBaseContext(), MusicService.class));
 
         // 초기 시간 텍스트 설정
         Time.setText(String.format("%02d:%02d", time / 60, (time)%60));

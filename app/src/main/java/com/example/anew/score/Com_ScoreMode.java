@@ -90,6 +90,7 @@ public class Com_ScoreMode extends Activity implements View.OnClickListener{
     private SoundPool sound2;
     private int soundID2;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +101,8 @@ public class Com_ScoreMode extends Activity implements View.OnClickListener{
 
         sound2 = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
         soundID2 = sound2.load(this, R.raw.undo, 1);
+
+        stopService(new Intent(getBaseContext(), MusicService.class));
 
         // 취소의 리스트의 초기값 설정
         undo_list[0] = Init;

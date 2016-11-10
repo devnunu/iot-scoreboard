@@ -25,6 +25,8 @@ public class Intro_Login extends Activity {
 
         setContentView(R.layout.intro_login);
 
+        startService(new Intent(getBaseContext(), MusicService.class));
+
         callback = new SessionCallback();                  // 이 두개의 함수 중요함
         Session.getCurrentSession().addCallback(callback);
 

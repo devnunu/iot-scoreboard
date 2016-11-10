@@ -115,6 +115,8 @@ public class Com_TimeMode extends Activity implements View.OnClickListener, Runn
         sound2 = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
         soundID2 = sound2.load(this, R.raw.undo, 1);
 
+        stopService(new Intent(getBaseContext(), MusicService.class));
+
         // setting 액티비티로부터 값 받아옴
         intent = getIntent();
         time = intent.getExtras().getInt("time");

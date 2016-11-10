@@ -34,9 +34,6 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
     private Context mContext;
     private BTCTemplateService mService;
     private ActivityHandler mActivityHandler;
-    private IFragmentListener mFragmentListener;
-    private BLE_Connect ble1;
-    private BLE_Connect2 ble2;
 
     // Refresh timer
     private Timer mRefreshTimer = null;
@@ -119,9 +116,8 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
         intent = getIntent();
         score = intent.getExtras().getInt("score");
         round = intent.getExtras().getInt("round");
-        //score=20;
-        //round = 4;
         RoundScore.setGoal_Round(round);
+        stopService(new Intent(getBaseContext(), MusicService.class));
 
         // Do data initialization after service started and binded
         doStartService();

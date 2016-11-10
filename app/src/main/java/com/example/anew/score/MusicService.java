@@ -1,7 +1,7 @@
 package com.example.anew.score;
 
 /**
- * Created by new on 2016. 11. 5..
+ * Created by new on 2016. 11. 10..
  */
 
 import android.app.Service;

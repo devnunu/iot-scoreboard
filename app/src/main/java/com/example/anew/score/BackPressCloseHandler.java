@@ -4,6 +4,7 @@ package com.example.anew.score;
  * Created by new on 2016. 9. 19..
  */
 import android.app.Activity;
+import android.content.Intent;
 import android.widget.Toast;
 
 import com.example.anew.score.service.BTCTemplateService;
@@ -28,7 +29,6 @@ public class BackPressCloseHandler {
         }
         if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
             activity.finish();
-            mService.onDestroy();
             toast.cancel();
         }
     }
