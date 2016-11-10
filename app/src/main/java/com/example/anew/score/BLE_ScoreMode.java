@@ -34,6 +34,9 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
     private Context mContext;
     private BTCTemplateService mService;
     private ActivityHandler mActivityHandler;
+    private IFragmentListener mFragmentListener;
+    private BLE_Connect ble1;
+    private BLE_Connect2 ble2;
 
     // Refresh timer
     private Timer mRefreshTimer = null;
@@ -61,8 +64,10 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
 
     // 취소 변수
     final static int Init = 0;
-    final static int H_up = 1;
-    final static int A_up = 2;
+    final static int H_up1 = 1;
+    final static int A_up1 = 2;
+    final static int H_up2 = 3;
+    final static int A_up2 = 4;
     int undo_Status = Init;
 
     // 라운드 변수
@@ -120,7 +125,6 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
 
         // Do data initialization after service started and binded
         doStartService();
-
     }
 
 
@@ -230,6 +234,7 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
         if (message != null && message.length() > 0) {
 
             if(message.equals("hn1")){
+                sendMessage("hn1");
                 sum1_num += 1;
                 undo_num++;
                 sound1.play(soundID,1f,1f,0,0,1f);
@@ -238,13 +243,30 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
                     gameEnd();
                 } else {
                     // 현재 상태 및 취소 리스트 동작 등록
-                    undo_Status = H_up;
-                    undo_list[undo_num] = H_up;
+                    undo_Status = H_up1;
+                    undo_list[undo_num] = H_up1;
+                    score_txt1.setText(String.format("%d", sum1_num/10));
+                    score_txt2.setText(String.format("%d", sum1_num%10));
+                }
+            }
+            else if(message.equals("hn2")){
+                sendMessage("hn2");
+                sum1_num += 3;
+                undo_num++;
+                sound1.play(soundID,1f,1f,0,0,1f);
+
+                if (sum1_num >= score) {
+                    gameEnd();
+                } else {
+                    // 현재 상태 및 취소 리스트 동작 등록
+                    undo_Status = H_up2;
+                    undo_list[undo_num] = H_up2;
                     score_txt1.setText(String.format("%d", sum1_num/10));
                     score_txt2.setText(String.format("%d", sum1_num%10));
                 }
             }
             else if(message.equals("an1")){
+                sendMessage("an1");
                 sum2_num += 1;
                 undo_num++;
                 sound1.play(soundID,1f,1f,0,0,1f);
@@ -253,18 +275,39 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
                     gameEnd();
                 } else {
                     // 현재 상태 및 취소 리스트 동작 등록
-                    undo_Status = A_up;
-                    undo_list[undo_num] = A_up;
+                    undo_Status = A_up1;
+                    undo_list[undo_num] = A_up1;
                     score_txt3.setText(String.format("%d", sum2_num/10));
                     score_txt4.setText(String.format("%d", sum2_num%10));
                 }
+            }
+            else if(message.equals("an2")){
+                sendMessage("an2");
+                sum2_num += 3;
+                undo_num++;
+                sound1.play(soundID,1f,1f,0,0,1f);
+
+                if (sum2_num >= score) {
+                    gameEnd();
+                } else {
+                    // 현재 상태 및 취소 리스트 동작 등록
+                    undo_Status = A_up2;
+                    undo_list[undo_num] = A_up2;
+                    score_txt3.setText(String.format("%d", sum2_num/10));
+                    score_txt4.setText(String.format("%d", sum2_num%10));
+                }
+            }
+            else if(message.equals("se")){
+                sendMessage("se");
+                gameEnd();
             }
             else if(message.equals("cc")){
                 switch (undo_Status) {
                     case Init:
                         break;
 
-                    case H_up:
+                    case H_up1:
+                        sendMessage("cc");
                         sum1_num -= 1;
                         undo_num--;
 
@@ -273,8 +316,29 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
                         score_txt2.setText(String.format("%d", sum1_num % 10));
                         break;
 
-                    case A_up:
+                    case A_up1:
+                        sendMessage("cc");
                         sum2_num -= 1;
+                        undo_num--;
+
+                        undo_Status = undo_list[undo_num];
+                        score_txt3.setText(String.format("%d", sum2_num / 10));
+                        score_txt4.setText(String.format("%d", sum2_num % 10));
+                        break;
+
+                    case H_up2:
+                        sendMessage("cc");
+                        sum1_num -= 3;
+                        undo_num--;
+
+                        undo_Status = undo_list[undo_num];
+                        score_txt1.setText(String.format("%d", sum1_num / 10));
+                        score_txt2.setText(String.format("%d", sum1_num % 10));
+                        break;
+
+                    case A_up2:
+                        sendMessage("cc");
+                        sum2_num -= 3;
                         undo_num--;
 
                         undo_Status = undo_list[undo_num];
@@ -284,9 +348,16 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
 
                 }
             }
-
-
         }
+    }
+
+
+    private void sendMessage(String message) {
+        if(message == null || message.length() < 1)
+            return;
+        // send to remote
+        if(mService != null && message != null)
+            mService.sendMessageToRemote(message);
     }
 
     /*****************************************************
@@ -341,6 +412,7 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
             startActivityForResult(enableIntent, Constants.REQUEST_ENABLE_BT);
         }
 
+
         // Load activity reports and display
         if(mRefreshTimer != null) {
             mRefreshTimer.cancel();
@@ -350,6 +422,8 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
         //mRefreshTimer = new Timer();
         //mRefreshTimer.schedule(new RefreshTimerTask(), 5*1000);
     }
+
+
 
     /*****************************************************
      *	Handler, Callback, Sub-classes
@@ -373,7 +447,6 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
             super.handleMessage(msg);
         }
     }	// End of class ActivityHandler
-
 
 
 

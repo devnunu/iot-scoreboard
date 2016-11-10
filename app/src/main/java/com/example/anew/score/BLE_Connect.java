@@ -182,7 +182,7 @@ public class BLE_Connect extends Activity implements View.OnClickListener {
     /**
      * Start service if it's not running
      */
-    private void doStartService() {
+    public void doStartService() {
         Log.d(TAG, "# Activity - doStartService()");
         startService(new Intent(this, BTCTemplateService.class));
         bindService(new Intent(this, BTCTemplateService.class), mServiceConn, Context.BIND_AUTO_CREATE);
@@ -338,7 +338,7 @@ public class BLE_Connect extends Activity implements View.OnClickListener {
                                     getResources().getString(R.string.bt_state_connected) + " no name");
                             mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_online));
                         }
-                        intent = new Intent(BLE_Connect.this, BLE_Setting.class);
+                        intent = new Intent(BLE_Connect.this, BLE_Connect2.class);
                         startActivity(intent);
                     }
                     break;

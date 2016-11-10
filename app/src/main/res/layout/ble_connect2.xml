@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:background="@drawable/bg_menu"
+    >
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bluetooth"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center"
+        android:paddingTop="200dp">
+
+        <TextView
+            android:id="@+id/txt_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="스캔"
+            android:textSize="@dimen/setting_txt"
+            android:textColor="@color/maincolor"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom">
+
+
+        <RelativeLayout
+            android:id="@+id/layout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- status bar : display connection info -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="26dip"
+                android:layout_gravity="center_horizontal|bottom"
+                android:orientation="horizontal"
+                style="@style/AppTheme.ConnectionInfoContainer" >
+                <ImageView
+                    android:id="@+id/status_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dip"
+                    android:layout_margin="3dip"
+                    />
+                <TextView
+                    android:id="@+id/status_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dip"
+                    android:layout_margin="3dip"
+                    style="@style/AppTheme.ConnectionInfoText" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>

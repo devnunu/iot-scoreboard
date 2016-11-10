@@ -44,6 +44,7 @@
 
         <activity android:name=".BLE_Setting"></activity>
         <activity android:name=".BLE_Connect"></activity>
+        <activity android:name=".BLE_Connect2"></activity>
         <activity android:name=".BLE_ScoreMode"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"></activity>
@@ -59,6 +60,13 @@
         <service
             android:name="com.example.anew.score.service.BTCTemplateService"
             android:configChanges="keyboardHidden|orientation|screenSize" >
+        </service>
+
+        <service android:name=".MusicService">
+            <intent-filter>﻿
+                <action android:name="com.example.anew.score" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
         </service>
 
         <!-- Broadcast receiver -->

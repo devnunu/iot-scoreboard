@@ -62,8 +62,10 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
     private StopWatch Swatch = new StopWatch();
 
     // 취소 변수
-    final static int H_up = 1;
-    final static int A_up = 2;
+    final static int H_up1 = 1;
+    final static int A_up1 = 2;
+    final static int H_up2 = 3;
+    final static int A_up2 = 4;
     int undo_Status = Init;
 
     // 시간 변수
@@ -289,36 +291,71 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
 
             if(message.equals("hn1")){
                 if(cur_Status==Run){
+                    sendMessage("hn1");
                     sum1_num += 1;
                     undo_num++;
                     sound1.play(soundID,1f,1f,0,0,1f);
 
                     // 현재 상태 및 취소 리스트 동작 등록
-                    undo_Status = A_up;
-                    undo_list[undo_num] = A_up;
+                    undo_Status = H_up1;
+                    undo_list[undo_num] = H_up1;
                     score_txt1.setText(String.format("%d", sum1_num/10));
                     score_txt2.setText(String.format("%d", sum1_num%10));
                 }
             }
             else if(message.equals("an1")){
                 if(cur_Status==Run) {
+                    sendMessage("an1");
                     sum2_num += 1;
                     undo_num++;
                     sound1.play(soundID,1f,1f,0,0,1f);
 
                     // 현재 상태 및 취소 리스트 동작 등록
-                    undo_Status = A_up;
-                    undo_list[undo_num] = A_up;
+                    undo_Status = A_up1;
+                    undo_list[undo_num] = A_up1;
                     score_txt3.setText(String.format("%d", sum2_num / 10));
                     score_txt4.setText(String.format("%d", sum2_num % 10));
                 }
+            }
+            if(message.equals("hn2")){
+                if(cur_Status==Run){
+                    sendMessage("hn2");
+                    sum1_num += 3;
+                    undo_num++;
+                    sound1.play(soundID,1f,1f,0,0,1f);
+
+                    // 현재 상태 및 취소 리스트 동작 등록
+                    undo_Status = H_up2;
+                    undo_list[undo_num] = H_up2;
+                    score_txt1.setText(String.format("%d", sum1_num/10));
+                    score_txt2.setText(String.format("%d", sum1_num%10));
+                }
+            }
+            else if(message.equals("an2")){
+                if(cur_Status==Run) {
+                    sendMessage("an2");
+                    sum2_num += 3;
+                    undo_num++;
+                    sound1.play(soundID,1f,1f,0,0,1f);
+
+                    // 현재 상태 및 취소 리스트 동작 등록
+                    undo_Status = A_up2;
+                    undo_list[undo_num] = A_up2;
+                    score_txt3.setText(String.format("%d", sum2_num / 10));
+                    score_txt4.setText(String.format("%d", sum2_num % 10));
+                }
+            }
+            else if(message.equals("se")){
+                sendMessage("se");
+                gameEnd();
             }
             else if(message.equals("cc")){
                 switch (undo_Status) {
                     case Init:
                         break;
 
-                    case H_up:
+                    case H_up1:
+                        sendMessage("cc");
                         sum1_num -= 1;
                         undo_num--;
 
@@ -327,8 +364,29 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
                         score_txt2.setText(String.format("%d", sum1_num % 10));
                         break;
 
-                    case A_up:
+                    case A_up1:
+                        sendMessage("cc");
                         sum2_num -= 1;
+                        undo_num--;
+
+                        undo_Status = undo_list[undo_num];
+                        score_txt3.setText(String.format("%d", sum2_num / 10));
+                        score_txt4.setText(String.format("%d", sum2_num % 10));
+                        break;
+
+                    case H_up2:
+                        sendMessage("cc");
+                        sum1_num -= 3;
+                        undo_num--;
+
+                        undo_Status = undo_list[undo_num];
+                        score_txt1.setText(String.format("%d", sum1_num / 10));
+                        score_txt2.setText(String.format("%d", sum1_num % 10));
+                        break;
+
+                    case A_up2:
+                        sendMessage("cc");
+                        sum2_num -= 3;
                         undo_num--;
 
                         undo_Status = undo_list[undo_num];
@@ -338,10 +396,15 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
 
                 }
             }
-
-
-
         }
+    }
+
+    private void sendMessage(String message) {
+        if(message == null || message.length() < 1)
+            return;
+        // send to remote
+        if(mService != null && message != null)
+            mService.sendMessageToRemote(message);
     }
 
     /*****************************************************

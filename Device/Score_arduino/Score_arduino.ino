@@ -4,6 +4,13 @@ int btn1 = 2;
 int btn2 = 3;
 int btn3 = 4;
 
+boolean flag1 = false;
+boolean flag2 = false;
+boolean flag3 = false;
+boolean flag4 = false;
+
+long times = 0;
+
 void setup(){
 
   Serial.begin(9600);
@@ -15,18 +22,111 @@ void setup(){
 
 void loop(){
 
-  if(digitalRead(btn1)==LOW){
-    Serial.write("hn1");
-    delay(400);
+  if((digitalRead(btn1)==LOW)&&(digitalRead(btn2)==LOW)){
+      flag4 = true;
+      
+      while(flag4){
+        delay(1);
+        times++;
+
+        if((digitalRead(btn1)==HIGH)&&(digitalRead(btn2)==HIGH)){
+          if(times>500){
+            Serial.write("se");
+          }
+          times = 0;
+          flag1 = false;
+        }
+      }
+    }
+
+  if(digitalRead(btn1)==LOW){ 
+      flag1 = true;
+      delay(100);
+
+      if((digitalRead(btn1)==LOW)&&(digitalRead(btn2)==LOW)){
+          
+          while(flag1){
+            delay(1);
+            times++;
+    
+            if((digitalRead(btn1)==HIGH)&&(digitalRead(btn2)==HIGH)){
+              if(times>500){
+                Serial.write("se");
+              }
+              times = 0;
+              flag1 = false;
+            }
+          }
+        }
+      else{
+          while(flag1){
+            delay(1);
+            times++;
+    
+            if(digitalRead(btn1)==HIGH){
+              if(times>500){
+                Serial.write("hn2");
+              }
+              else{
+                Serial.write("hn1");
+              }
+              times = 0;
+              flag1 = false;  
+            }
+          }
+      }
   }
 
   if(digitalRead(btn2)==LOW){
-    Serial.write("an1");
-    delay(400);
-  }
+      flag2 = true;
+      delay(100);
 
+      if((digitalRead(btn1)==LOW)&&(digitalRead(btn2)==LOW)){
+          
+          while(flag2){
+            delay(1);
+            times++;
+    
+            if((digitalRead(btn1)==HIGH)&&(digitalRead(btn2)==HIGH)){
+              if(times>500){
+                Serial.write("se");
+              }
+              times = 0;
+              flag2 = false;
+            }
+          }
+        }
+        else{
+          while(flag2){
+            delay(1);
+            times++;
+    
+            if(digitalRead(btn2)==HIGH){
+              if(times>500){
+                Serial.write("an2");
+              }
+              else{
+                Serial.write("an1");
+              }
+              times = 0;
+              flag2 = false;  
+            }
+          }
+        }
+  }
+  
   if(digitalRead(btn3)==LOW){
-    Serial.write("cc");
-    delay(400);
+      flag3 = true;
+      
+      while(flag3){
+        delay(1);
+        times++;
+
+        if(digitalRead(btn3)==HIGH){\
+          Serial.write("cc");
+          times = 0;
+          flag3 = false;  
+        }
+     }
   }
 }

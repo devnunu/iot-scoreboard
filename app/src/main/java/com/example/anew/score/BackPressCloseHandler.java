@@ -6,9 +6,12 @@ package com.example.anew.score;
 import android.app.Activity;
 import android.widget.Toast;
 
+import com.example.anew.score.service.BTCTemplateService;
+
 public class BackPressCloseHandler {
 
     private long backKeyPressedTime = 0;
+    private BTCTemplateService mService;
     private Toast toast;
 
     private Activity activity;
@@ -25,6 +28,7 @@ public class BackPressCloseHandler {
         }
         if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
             activity.finish();
+            mService.onDestroy();
             toast.cancel();
         }
     }

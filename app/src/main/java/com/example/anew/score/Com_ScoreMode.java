@@ -87,6 +87,9 @@ public class Com_ScoreMode extends Activity implements View.OnClickListener{
     private SoundPool sound1;
     private int soundID;
 
+    private SoundPool sound2;
+    private int soundID2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +97,9 @@ public class Com_ScoreMode extends Activity implements View.OnClickListener{
 
         sound1 = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
         soundID = sound1.load(this, R.raw.coin, 1);
+
+        sound2 = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        soundID2 = sound2.load(this, R.raw.undo, 1);
 
         // 취소의 리스트의 초기값 설정
         undo_list[0] = Init;
@@ -195,6 +201,7 @@ public class Com_ScoreMode extends Activity implements View.OnClickListener{
                         undo_Status = undo_list[undo_num];
                         score_txt1.setText(String.format("%d", sum1_num/10));
                         score_txt2.setText(String.format("%d", sum1_num%10));
+                        sound2.play(soundID2,1f,1f,0,0,1f);
                         break;
 
                     case Left_3up:
@@ -204,6 +211,7 @@ public class Com_ScoreMode extends Activity implements View.OnClickListener{
                         undo_Status = undo_list[undo_num];
                         score_txt1.setText(String.format("%d", sum1_num/10));
                         score_txt2.setText(String.format("%d", sum1_num%10));
+                        sound2.play(soundID2,1f,1f,0,0,1f);
                         break;
 
                     case Right_2up:
@@ -213,6 +221,7 @@ public class Com_ScoreMode extends Activity implements View.OnClickListener{
                         undo_Status = undo_list[undo_num];
                         score_txt3.setText(String.format("%d", sum2_num/10));
                         score_txt4.setText(String.format("%d", sum2_num%10));
+                        sound2.play(soundID2,1f,1f,0,0,1f);
                         break;
 
                     case Right_3up:
@@ -222,6 +231,7 @@ public class Com_ScoreMode extends Activity implements View.OnClickListener{
                         undo_Status = undo_list[undo_num];
                         score_txt3.setText(String.format("%d", sum2_num/10));
                         score_txt4.setText(String.format("%d", sum2_num%10));
+                        sound2.play(soundID2,1f,1f,0,0,1f);
                         break;
 
                 }
