@@ -22,23 +22,6 @@ void setup(){
 
 void loop(){
 
-  if((digitalRead(btn1)==LOW)&&(digitalRead(btn2)==LOW)){
-      flag4 = true;
-      
-      while(flag4){
-        delay(1);
-        times++;
-
-        if((digitalRead(btn1)==HIGH)&&(digitalRead(btn2)==HIGH)){
-          if(times>500){
-            Serial.write("se");
-          }
-          times = 0;
-          flag1 = false;
-        }
-      }
-    }
-
   if(digitalRead(btn1)==LOW){ 
       flag1 = true;
       delay(100);
