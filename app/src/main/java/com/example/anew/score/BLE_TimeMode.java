@@ -359,7 +359,7 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
                         break;
 
                     case H_up1:
-                        sendMessage("cc");
+                        sendMessage("F1\n");
                         sum1_num -= 1;
                         undo_num--;
 
@@ -369,7 +369,7 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
                         break;
 
                     case A_up1:
-                        sendMessage("cc");
+                        sendMessage("S1\n");
                         sum2_num -= 1;
                         undo_num--;
 
@@ -379,7 +379,7 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
                         break;
 
                     case H_up2:
-                        sendMessage("cc");
+                        sendMessage("F3\n");
                         sum1_num -= 3;
                         undo_num--;
 
@@ -389,7 +389,7 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
                         break;
 
                     case A_up2:
-                        sendMessage("cc");
+                        sendMessage("S3\n");
                         sum2_num -= 3;
                         undo_num--;
 
