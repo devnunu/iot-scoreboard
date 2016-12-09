@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme2"
         android:largeHeap="true">
-        <activity android:name=".Intro_Login">
+        <activity android:name=".Intro_Title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,7 +37,6 @@
             android:theme="@android:style/Theme.Dialog"
             android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
-        <activity android:name=".Intro_Title"></activity>
         <activity android:name=".Intro_menu"></activity>
 
         <activity android:name=".Kakao.KakaoSignupActivity"></activity>
@@ -60,14 +59,12 @@
         <service
             android:name="com.example.anew.score.service.BTCTemplateService"
             android:configChanges="keyboardHidden|orientation|screenSize" >
-        </service>
-
-        <service android:name=".MusicService">
-            <intent-filter>﻿
-                <action android:name="com.example.anew.score" />
-                <category android:name="android.intent.category.DEFAULT"/>
+            <intent-filter>
+                <action android:name="android.ble.service.connect"/>
             </intent-filter>
         </service>
+
+
 
         <!-- Broadcast receiver -->
         <receiver android:name="com.example.anew.score.service.ServiceMonitoring$ServiceMonitoringBR" />

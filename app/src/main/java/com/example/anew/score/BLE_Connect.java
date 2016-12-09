@@ -20,6 +20,7 @@ package com.example.anew.score;
  */
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.ComponentName;
 import android.content.Context;
@@ -56,7 +57,7 @@ public class BLE_Connect extends Activity implements View.OnClickListener {
 
     // Context, System
     private Context mContext;
-    private BTCTemplateService mService;
+    private BTCTemplateService mService = null;
     private ActivityHandler mActivityHandler;
     private TextView txt_scan;
 
@@ -96,8 +97,24 @@ public class BLE_Connect extends Activity implements View.OnClickListener {
         mTextStatus = (TextView) findViewById(R.id.status_text);
         mTextStatus.setText(getResources().getString(R.string.bt_state_init));
 
+        if(isServiceRunningCheck()){
+            intent = new Intent(BLE_Connect.this, BLE_Setting.class);
+            startActivity(intent);
+        }
+
+
         // Do data initialization after service started and binded
         doStartService();
+    }
+
+    public boolean isServiceRunningCheck() {
+        ActivityManager manager = (ActivityManager) this.getSystemService(Activity.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if ("com.example.anew.score.service.BTCTemplateService".equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -191,7 +208,7 @@ public class BLE_Connect extends Activity implements View.OnClickListener {
     /**
      * Stop the service
      */
-    private void doStopService() {
+    public void doStopService() {
         Log.d(TAG, "# Activity - doStopService()");
         mService.finalizeService();
         stopService(new Intent(this, BTCTemplateService.class));
@@ -211,6 +228,7 @@ public class BLE_Connect extends Activity implements View.OnClickListener {
         }
 
         mService.setupService(mActivityHandler);
+
 
         // If BT is not on, request that it be enabled.
         // RetroWatchService.setupBT() will then be called during onActivityResult

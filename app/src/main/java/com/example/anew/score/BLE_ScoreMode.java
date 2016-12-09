@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -31,7 +32,6 @@ import java.util.Timer;
 
 public class BLE_ScoreMode extends Activity implements View.OnClickListener{
 
-    private Context mContext;
     private BTCTemplateService mService;
     private ActivityHandler mActivityHandler;
 
@@ -117,10 +117,10 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
         score = intent.getExtras().getInt("score");
         round = intent.getExtras().getInt("round");
         RoundScore.setGoal_Round(round);
-        stopService(new Intent(getBaseContext(), MusicService.class));
 
         // Do data initialization after service started and binded
         doStartService();
+
     }
 
 
@@ -177,10 +177,14 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
         undo_Status = Init;
 
         // 라운드 스코어 처리
-        if(sum1_num>sum2_num)
+        if(sum1_num > sum2_num) {
+            sendMessage("H0");
             H_win++;
-        else if(sum2_num>sum1_num)
+        }
+        else if(sum2_num > sum1_num) {
+            sendMessage("A0");
             A_win++;
+        }
 
         // 종합 점수 초기화
         sum1_num = 0;
@@ -210,10 +214,12 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
 
         // 목표 라운드에 진입시
         if(round_Status==round-1){
+            sendMessage("G0");
             round_Status = 0;
             intent = new Intent(getBaseContext(), Game_Result.class);
             intent.putExtra("RoundScore", RoundScore);
             startActivityForResult(intent,1);
+
             finish();
         }
         else{
@@ -230,7 +236,7 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
         if (message != null && message.length() > 0) {
 
             if(message.equals("hn1")){
-                sendMessage("hn1");
+                sendMessage("h1\n");
                 sum1_num += 1;
                 undo_num++;
                 sound1.play(soundID,1f,1f,0,0,1f);
@@ -246,7 +252,7 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
                 }
             }
             else if(message.equals("hn2")){
-                sendMessage("hn2");
+                sendMessage("h3\n");
                 sum1_num += 3;
                 undo_num++;
                 sound1.play(soundID,1f,1f,0,0,1f);
@@ -262,7 +268,7 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
                 }
             }
             else if(message.equals("an1")){
-                sendMessage("an1");
+                sendMessage("a1\n");
                 sum2_num += 1;
                 undo_num++;
                 sound1.play(soundID,1f,1f,0,0,1f);
@@ -278,7 +284,7 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
                 }
             }
             else if(message.equals("an2")){
-                sendMessage("an2");
+                sendMessage("a3\n");
                 sum2_num += 3;
                 undo_num++;
                 sound1.play(soundID,1f,1f,0,0,1f);
@@ -294,7 +300,6 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
                 }
             }
             else if(message.equals("se")){
-                sendMessage("se");
                 gameEnd();
             }
             else if(message.equals("cc")){
@@ -385,6 +390,11 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
     private void doStartService() {
         startService(new Intent(this, BTCTemplateService.class));
         bindService(new Intent(this, BTCTemplateService.class), mServiceConn, Context.BIND_AUTO_CREATE);
+    }
+
+    private void doStopService() {
+        mService.finalizeService();
+        stopService(new Intent(this, BTCTemplateService.class));
     }
 
     /**

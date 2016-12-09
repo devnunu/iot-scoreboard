@@ -125,7 +125,6 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
         round = intent.getExtras().getInt("round");
         goal_time = time;
         RoundScore.setGoal_Round(round);
-        stopService(new Intent(getBaseContext(), MusicService.class));
 
         // 초기 시간 텍스트 설정
         Time.setText(String.format("%02d:%02d", time / 60, (time)%60));
@@ -251,10 +250,14 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
         RoundScore.setRound(round_Status);
 
         // 라운드 스코어 처리
-        if(sum1_num>sum2_num)
+        if(sum1_num > sum2_num) {
+            sendMessage("H0");
             H_win++;
-        else if(sum2_num>sum1_num)
+        }
+        else if(sum2_num > sum1_num) {
+            sendMessage("A0");
             A_win++;
+        }
 
         // 종합 점수 초기화
         sum1_num = 0;
@@ -268,6 +271,7 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
 
         // 목표 라운드에 진입시
         if(round_Status==round-1){
+            sendMessage("G0");
             round_Status = 0;
             intent = new Intent(getBaseContext(), Game_Result.class);
             intent.putExtra("RoundScore", RoundScore);
@@ -292,7 +296,7 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
 
             if(message.equals("hn1")){
                 if(cur_Status==Run){
-                    sendMessage("hn1");
+                    sendMessage("h1\n");
                     sum1_num += 1;
                     undo_num++;
                     sound1.play(soundID,1f,1f,0,0,1f);
@@ -306,7 +310,7 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
             }
             else if(message.equals("an1")){
                 if(cur_Status==Run) {
-                    sendMessage("an1");
+                    sendMessage("a1\n");
                     sum2_num += 1;
                     undo_num++;
                     sound1.play(soundID,1f,1f,0,0,1f);
@@ -320,7 +324,7 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
             }
             if(message.equals("hn2")){
                 if(cur_Status==Run){
-                    sendMessage("hn2");
+                    sendMessage("h3\n");
                     sum1_num += 3;
                     undo_num++;
                     sound1.play(soundID,1f,1f,0,0,1f);
@@ -334,7 +338,7 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
             }
             else if(message.equals("an2")){
                 if(cur_Status==Run) {
-                    sendMessage("an2");
+                    sendMessage("a3\n");
                     sum2_num += 3;
                     undo_num++;
                     sound1.play(soundID,1f,1f,0,0,1f);
@@ -347,7 +351,6 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
                 }
             }
             else if(message.equals("se")){
-                sendMessage("se");
                 gameEnd();
             }
             else if(message.equals("cc")){

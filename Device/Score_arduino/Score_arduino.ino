@@ -1,5 +1,7 @@
 #include <SoftwareSerial.h>
 
+int LED = 5;
+
 int btn1 = 2;
 int btn2 = 3;
 int btn3 = 4;
@@ -15,6 +17,8 @@ void setup(){
 
   Serial.begin(9600);
 
+  pinMode(LED, OUTPUT); 
+
   pinMode(btn1, INPUT_PULLUP);
   pinMode(btn2, INPUT_PULLUP);
   pinMode(btn3, INPUT_PULLUP);
@@ -23,6 +27,7 @@ void setup(){
 void loop(){
 
   if(digitalRead(btn1)==LOW){ 
+      digitalWrite(LED, HIGH);
       flag1 = true;
       delay(100);
 
@@ -61,6 +66,7 @@ void loop(){
   }
 
   if(digitalRead(btn2)==LOW){
+      digitalWrite(LED, HIGH);
       flag2 = true;
       delay(100);
 
@@ -99,6 +105,7 @@ void loop(){
   }
   
   if(digitalRead(btn3)==LOW){
+      digitalWrite(LED, HIGH);
       flag3 = true;
       
       while(flag3){
@@ -112,4 +119,6 @@ void loop(){
         }
      }
   }
+  
+  digitalWrite(LED, LOW);
 }

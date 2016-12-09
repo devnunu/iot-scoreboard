@@ -54,7 +54,7 @@ public class BLE_Connect2 extends Activity implements View.OnClickListener {
 
     // Context, System
     private Context mContext;
-    private BTCTemplateService mService2;
+    private BTCTemplateService mService2 = null;
     private ActivityHandler mActivityHandler;
     private TextView txt_scan;
 
@@ -93,6 +93,7 @@ public class BLE_Connect2 extends Activity implements View.OnClickListener {
         mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_invisible));
         mTextStatus = (TextView) findViewById(R.id.status_text);
         mTextStatus.setText(getResources().getString(R.string.bt_state_init));
+
 
         // Do data initialization after service started and binded
         doStartService();
@@ -189,7 +190,7 @@ public class BLE_Connect2 extends Activity implements View.OnClickListener {
     /**
      * Stop the service
      */
-    private void doStopService() {
+    public void doStopService() {
         Log.d(TAG, "# Activity - doStopService()");
         mService2.finalizeService();
         stopService(new Intent(this, BTCTemplateService.class));
