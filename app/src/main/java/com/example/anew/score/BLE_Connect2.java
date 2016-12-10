@@ -61,6 +61,8 @@ public class BLE_Connect2 extends Activity implements View.OnClickListener {
     private ImageView mImageBT = null;
     private TextView mTextStatus = null;
 
+    private String DeviceName = "board";
+
     // Refresh timer
     private Timer mRefreshTimer = null;
 
@@ -246,6 +248,7 @@ public class BLE_Connect2 extends Activity implements View.OnClickListener {
      */
     private void doScan() {
         Intent intent = new Intent(this, DeviceListActivity.class);
+        intent.putExtra("DeviceName", DeviceName);
         startActivityForResult(intent, Constants.REQUEST_CONNECT_DEVICE);
     }
 

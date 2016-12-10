@@ -38,6 +38,7 @@ import com.example.anew.score.bluetooth.BleManager;
 import com.example.anew.score.utils.Logs;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Set;
 
 
@@ -57,6 +58,7 @@ public class DeviceListActivity extends Activity {
 
     // Return Intent extra
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
+    private String DeviceName = null;
 
     // Member fields
     private ActivityHandler mActivityHandler;
@@ -66,6 +68,8 @@ public class DeviceListActivity extends Activity {
     private ArrayAdapter<String> mNewDevicesArrayAdapter;
     
     private ArrayList<BluetoothDevice> mDevices = new ArrayList<BluetoothDevice>();
+
+    private Intent intent = null;
 
     // UI stuff
     Button mScanButton = null;
@@ -80,6 +84,10 @@ public class DeviceListActivity extends Activity {
         // Setup the window
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_device_list);
+
+        // intent value earning
+        intent = getIntent();
+        DeviceName = intent.getExtras().getString("DeviceName");
 
         // Set result CANCELED incase the user backs out
         setResult(Activity.RESULT_CANCELED);
@@ -101,6 +109,7 @@ public class DeviceListActivity extends Activity {
         mPairedDevicesArrayAdapter = new ArrayAdapter<String>(this, R.layout.adapter_device_name);
         mNewDevicesArrayAdapter = new ArrayAdapter<String>(this, R.layout.adapter_device_name);
 
+
         // Find and set up the ListView for paired devices
         ListView pairedListView = (ListView) findViewById(R.id.paired_devices);
         pairedListView.setAdapter(mPairedDevicesArrayAdapter);
@@ -121,11 +130,15 @@ public class DeviceListActivity extends Activity {
         // Get a set of currently paired devices
         Set<BluetoothDevice> pairedDevices = mBtAdapter.getBondedDevices();
 
+
         // If there are paired devices, add each one to the ArrayAdapter
         if (pairedDevices.size() > 0) {
             findViewById(R.id.title_paired_devices).setVisibility(View.VISIBLE);
             for (BluetoothDevice device : pairedDevices) {
                 mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+                if(device.getName().equals(DeviceName)){
+                    autoConnect(device.getAddress());
+                }
             }
         } else {
             String noDevices = getResources().getText(R.string.none_paired).toString();
@@ -198,6 +211,23 @@ public class DeviceListActivity extends Activity {
     		}
     	}
     	return false;
+    }
+
+    private void autoConnect(String addr){
+        // Cancel discovery because it's costly and we're about to connect
+        mBtAdapter.cancelDiscovery();
+
+        // Get the device MAC address, which is the last 17 chars in the View
+            String address = addr;
+            Log.d(TAG, "User selected device : " + address);
+
+            // Create the result Intent and include the MAC address
+            Intent intent = new Intent();
+            intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
+
+            // Set result and finish this Activity
+            setResult(Activity.RESULT_OK, intent);
+            finish();
     }
 
     /**

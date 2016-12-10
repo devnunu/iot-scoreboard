@@ -61,6 +61,8 @@ public class BLE_Connect extends Activity implements View.OnClickListener {
     private ActivityHandler mActivityHandler;
     private TextView txt_scan;
 
+    private String DeviceName = "wristlet";
+
     private ImageView mImageBT = null;
     private TextView mTextStatus = null;
 
@@ -265,6 +267,7 @@ public class BLE_Connect extends Activity implements View.OnClickListener {
      */
     private void doScan() {
         Intent intent = new Intent(this, DeviceListActivity.class);
+        intent.putExtra("DeviceName", DeviceName);
         startActivityForResult(intent, Constants.REQUEST_CONNECT_DEVICE);
     }
 
