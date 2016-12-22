@@ -21,19 +21,6 @@
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true" />
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="00:00"
-            android:textSize="30pt"
-            android:textStyle="bold"
-            android:textColor="@color/maincolor"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-
         <ImageButton
             android:id="@+id/btn_end"
             android:layout_width="590px"
@@ -48,140 +35,22 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="15dp">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/home"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="HOME"
-            android:textColor="@color/maincolor"
-            android:gravity="center"
-            android:textSize="15pt"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:id="@+id/away"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="AWAY"
-            android:textSize="15pt"
-            android:textStyle="bold"
-            android:textColor="@color/maincolor"/>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
-
-        <RelativeLayout
+            android:id="@+id/time"
+            android:paddingTop="40dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/linearLayout1"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true">
-
-                <TextView
-                    android:id="@+id/score_txt1"
-                    android:layout_width="@dimen/imgwidth"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:gravity="center"
-                    android:textSize="@dimen/score_num"
-                    android:textColor="@color/maincolor"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true" />
-
-                <TextView
-                    android:id="@+id/score_txt2"
-                    android:layout_width="@dimen/imgwidth"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:gravity="center"
-                    android:textSize="@dimen/score_num"
-                    android:textColor="@color/maincolor"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true" />
-
-                <TextView
-                    android:id="@+id/txt1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:text="0"
-                    android:textSize="30pt"
-                    android:textColor="@color/maincolor"
-                    android:layout_alignBottom="@+id/linearLayout1"
-                    android:layout_toEndOf="@+id/linearLayout1" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/linearLayout2"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true">
-
-                <TextView
-                    android:id="@+id/txt2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="10dp"
-                    android:text="0"
-                    android:textSize="30pt"
-                    android:textColor="@color/maincolor"
-                    android:layout_alignBottom="@+id/linearLayout2"
-                    android:layout_toStartOf="@+id/linearLayout2" />
-
-                <TextView
-                    android:id="@+id/score_txt3"
-                    android:layout_width="@dimen/imgwidth"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textSize="@dimen/score_num"
-                    android:textColor="@color/maincolor"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true" />
-                <TextView
-                    android:id="@+id/score_txt4"
-                    android:layout_width="@dimen/imgwidth"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textSize="@dimen/score_num"
-                    android:textColor="@color/maincolor"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true" />
-
-            </LinearLayout>
-
-
-
-        </RelativeLayout>
-
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="00:00"
+            android:textSize="90pt"
+            android:textStyle="bold"
+            android:textColor="@color/maincolor"
+            android:layout_centerHorizontal="true" />
 
     </LinearLayout>
+
 
 </LinearLayout>

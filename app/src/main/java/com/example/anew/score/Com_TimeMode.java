@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -124,6 +125,10 @@ public class Com_TimeMode extends Activity implements View.OnClickListener, Runn
 
         // 초기 시간 텍스트 설정
         Time.setText(String.format("%02d:%02d", time / 60, (time)%60));
+
+
+        // 액티비티 안꺼지게
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
     }
 

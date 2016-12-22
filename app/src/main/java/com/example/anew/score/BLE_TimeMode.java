@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,17 +41,6 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
 
     private TextView round_end;
     private TextView round_num;
-
-    private TextView txt1;
-    private TextView txt2;
-
-    private TextView score_txt1;
-    private TextView score_txt2;
-    private TextView score_txt3;
-    private TextView score_txt4;
-
-    private TextView Home_txt;
-    private TextView Away_txt;
 
     // 다이얼로그 컴포넌트 생성
     private Dialog input_dlg;
@@ -128,6 +118,10 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
 
         // 초기 시간 텍스트 설정
         Time.setText(String.format("%02d:%02d", time / 60, (time)%60));
+
+
+        // 액티비티 안꺼지게
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         // Do data initialization after service started and binded
         doStartService();
@@ -263,12 +257,6 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
         sum1_num = 0;
         sum2_num = 0;
 
-        // 점수 텍스트 초기화
-        score_txt1.setText(String.format("%d", sum1_num/10));
-        score_txt2.setText(String.format("%d", sum1_num%10));
-        score_txt3.setText(String.format("%d", sum2_num/10));
-        score_txt4.setText(String.format("%d", sum2_num%10));
-
         // 목표 라운드에 진입시
         if(round_Status==round-1){
             sendMessage("G0");
@@ -287,6 +275,8 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
 
         // 초기 시간 텍스트 설정
         Time.setText(String.format("%02d:%02d", time / 60, (time)%60));
+
+        MatrixTime(1000);
     }
 
 
@@ -304,8 +294,6 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
                     // 현재 상태 및 취소 리스트 동작 등록
                     undo_Status = H_up1;
                     undo_list[undo_num] = H_up1;
-                    score_txt1.setText(String.format("%d", sum1_num/10));
-                    score_txt2.setText(String.format("%d", sum1_num%10));
                 }
             }
             else if(message.equals("an1")){
@@ -318,8 +306,6 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
                     // 현재 상태 및 취소 리스트 동작 등록
                     undo_Status = A_up1;
                     undo_list[undo_num] = A_up1;
-                    score_txt3.setText(String.format("%d", sum2_num / 10));
-                    score_txt4.setText(String.format("%d", sum2_num % 10));
                 }
             }
             if(message.equals("hn2")){
@@ -332,8 +318,6 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
                     // 현재 상태 및 취소 리스트 동작 등록
                     undo_Status = H_up2;
                     undo_list[undo_num] = H_up2;
-                    score_txt1.setText(String.format("%d", sum1_num/10));
-                    score_txt2.setText(String.format("%d", sum1_num%10));
                 }
             }
             else if(message.equals("an2")){
@@ -346,8 +330,6 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
                     // 현재 상태 및 취소 리스트 동작 등록
                     undo_Status = A_up2;
                     undo_list[undo_num] = A_up2;
-                    score_txt3.setText(String.format("%d", sum2_num / 10));
-                    score_txt4.setText(String.format("%d", sum2_num % 10));
                 }
             }
             else if(message.equals("se")){
@@ -364,8 +346,6 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
                         undo_num--;
 
                         undo_Status = undo_list[undo_num];
-                        score_txt1.setText(String.format("%d", sum1_num / 10));
-                        score_txt2.setText(String.format("%d", sum1_num % 10));
                         break;
 
                     case A_up1:
@@ -374,8 +354,6 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
                         undo_num--;
 
                         undo_Status = undo_list[undo_num];
-                        score_txt3.setText(String.format("%d", sum2_num / 10));
-                        score_txt4.setText(String.format("%d", sum2_num % 10));
                         break;
 
                     case H_up2:
@@ -384,8 +362,6 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
                         undo_num--;
 
                         undo_Status = undo_list[undo_num];
-                        score_txt1.setText(String.format("%d", sum1_num / 10));
-                        score_txt2.setText(String.format("%d", sum1_num % 10));
                         break;
 
                     case A_up2:
@@ -394,8 +370,6 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
                         undo_num--;
 
                         undo_Status = undo_list[undo_num];
-                        score_txt3.setText(String.format("%d", sum2_num / 10));
-                        score_txt4.setText(String.format("%d", sum2_num % 10));
                         break;
 
                 }
@@ -496,7 +470,15 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
         }
     }	// End of class ActivityHandler
 
+    public void MatrixTime(int delayTime){
+        long saveTime = System.currentTimeMillis();
+        long currTime = 0;
 
+
+        while( currTime - saveTime < delayTime){
+            currTime = System.currentTimeMillis();
+        }
+    }
 
     // 초기 세팅 메소드
     public void setting(){
@@ -504,32 +486,11 @@ public class BLE_TimeMode extends Activity implements View.OnClickListener, Runn
         // 컴포넌트 연결
         Time = (TextView)findViewById(R.id.time);
 
-        score_txt1 = (TextView)findViewById(R.id.score_txt1);
-        score_txt2 = (TextView)findViewById(R.id.score_txt2);
-        score_txt3 = (TextView)findViewById(R.id.score_txt3);
-        score_txt4 = (TextView)findViewById(R.id.score_txt4);
-
-        txt1 = (TextView) findViewById(R.id.txt1);
-        txt2 = (TextView) findViewById(R.id.txt2);
-
-        Home_txt = (TextView)findViewById(R.id.home);
-        Away_txt = (TextView)findViewById(R.id.away);
-
         btnScore = (ImageButton)findViewById(R.id.btn_score);
         btnEnd = (ImageButton)findViewById(R.id.btn_end);
 
         // 글꼴 연결
-        Home_txt.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
-        Away_txt.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
-
         Time.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
-        txt1.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
-        txt2.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
-
-        score_txt1.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
-        score_txt2.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
-        score_txt3.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
-        score_txt4.setTypeface(Typeface.createFromAsset(getAssets(),"NanumGothicExtraBold.otf"));
 
 
         // 버튼 클릭 이벤트 리스너 등록

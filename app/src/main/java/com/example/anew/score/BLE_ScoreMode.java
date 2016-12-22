@@ -21,6 +21,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -117,6 +118,9 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
         score = intent.getExtras().getInt("score");
         round = intent.getExtras().getInt("round");
         RoundScore.setGoal_Round(round);
+
+        // 액티비티 안꺼지게
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         // Do data initialization after service started and binded
         doStartService();
@@ -229,6 +233,7 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
             round_Status++;
         }
 
+        MatrixTime(2000);
     }
 
     // Show messages from remote
@@ -454,7 +459,15 @@ public class BLE_ScoreMode extends Activity implements View.OnClickListener{
         }
     }	// End of class ActivityHandler
 
+    public void MatrixTime(int delayTime){
+        long saveTime = System.currentTimeMillis();
+        long currTime = 0;
 
+
+        while( currTime - saveTime < delayTime){
+            currTime = System.currentTimeMillis();
+        }
+    }
 
     // 초기 세팅 메소드
     public void setting() {

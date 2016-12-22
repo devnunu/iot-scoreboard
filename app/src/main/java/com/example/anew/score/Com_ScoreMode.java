@@ -12,6 +12,7 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -113,6 +114,10 @@ public class Com_ScoreMode extends Activity implements View.OnClickListener{
         score = intent.getExtras().getInt("score");
         round = intent.getExtras().getInt("round");
         RoundScore.setGoal_Round(round);
+
+
+        // 액티비티 안꺼지게
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
     }
 
